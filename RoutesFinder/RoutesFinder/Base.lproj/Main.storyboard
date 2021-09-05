@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nvk-nd-ugB">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="TpO-3r-iG3">
+            <objects>
+                <viewController id="nvk-nd-ugB" customClass="MapViewController" customModule="RoutesFinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2co-Na-3sp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67L-8A-7Uz" customClass="MapViewLite" customModule="heresdk">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="741"/>
+                                <gestureRecognizers/>
+                            </mapView>
+                            <textField opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="End" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J9w-7T-qrw">
+                                <rect key="frame" x="20" y="818" width="287" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="287" id="ZQz-z1-pKx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Start" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aun-sI-nNU">
+                                <rect key="frame" x="20" y="759" width="287" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="287" id="qJZ-6D-bat"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TbU-mX-3fW">
+                                <rect key="frame" x="354" y="44" width="40" height="120"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OU1-2O-L0x">
+                                        <rect key="frame" x="5" y="5" width="30" height="110"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6H-3X-zFe" userLabel="CenterToUser">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="e6m-03-l3h"/>
+                                                </constraints>
+                                                <state key="normal" image="current-location-icon.png"/>
+                                                <connections>
+                                                    <action selector="didTapUserLocation:" destination="nvk-nd-ugB" eventType="touchUpInside" id="nBd-gx-51S"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fZ-lM-2Zt" userLabel="MapStyle">
+                                                <rect key="frame" x="0.0" y="40" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="QeN-HX-iRw"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <state key="normal" image="minus.magnifyingglass" catalog="system"/>
+                                                <connections>
+                                                    <action selector="zoomIn:" destination="nvk-nd-ugB" eventType="touchUpInside" id="dhv-QS-Yur"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vhs-2w-G7Q">
+                                                <rect key="frame" x="0.0" y="80" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="tbM-rx-IUC"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <state key="normal" image="plus.magnifyingglass" catalog="system"/>
+                                                <connections>
+                                                    <action selector="zoomOut:" destination="nvk-nd-ugB" eventType="touchUpInside" id="fcH-1l-Cz0"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <viewLayoutGuide key="safeArea" id="VTW-Fz-wb7"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="3NU-09-FPK"/>
+                                    <constraint firstItem="OU1-2O-L0x" firstAttribute="top" secondItem="TbU-mX-3fW" secondAttribute="top" constant="5" id="6F4-KK-KMB"/>
+                                    <constraint firstAttribute="width" constant="40" id="7Sx-8u-vWK"/>
+                                    <constraint firstAttribute="trailing" secondItem="OU1-2O-L0x" secondAttribute="trailing" constant="5" id="am0-aF-yTR"/>
+                                    <constraint firstItem="OU1-2O-L0x" firstAttribute="leading" secondItem="TbU-mX-3fW" secondAttribute="leading" constant="5" id="kQa-hg-aJd"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ty-ed-mgw">
+                                <rect key="frame" x="333" y="786" width="54" height="53"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <state key="normal" title="Route">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
+                                </state>
+                                <state key="highlighted">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="heavy"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTapRoute:" destination="nvk-nd-ugB" eventType="touchUpInside" id="P66-IB-xp0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fIQ-N0-GJ7"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Aun-sI-nNU" firstAttribute="top" secondItem="67L-8A-7Uz" secondAttribute="bottom" constant="18" id="05l-TM-A7y"/>
+                            <constraint firstItem="Aun-sI-nNU" firstAttribute="leading" secondItem="fIQ-N0-GJ7" secondAttribute="leading" constant="20" id="6Dd-ud-kr4"/>
+                            <constraint firstItem="J9w-7T-qrw" firstAttribute="leading" secondItem="fIQ-N0-GJ7" secondAttribute="leading" constant="20" id="C6K-Ut-52K"/>
+                            <constraint firstItem="J9w-7T-qrw" firstAttribute="bottom" secondItem="fIQ-N0-GJ7" secondAttribute="bottom" id="Hll-8t-pzV"/>
+                            <constraint firstItem="fIQ-N0-GJ7" firstAttribute="trailing" secondItem="5ty-ed-mgw" secondAttribute="trailing" constant="27" id="JWE-C7-N43"/>
+                            <constraint firstItem="67L-8A-7Uz" firstAttribute="trailing" secondItem="2co-Na-3sp" secondAttribute="trailing" id="LUS-GT-Hyh"/>
+                            <constraint firstItem="5ty-ed-mgw" firstAttribute="leading" secondItem="Aun-sI-nNU" secondAttribute="trailing" constant="26" id="Qui-AZ-04w"/>
+                            <constraint firstItem="Aun-sI-nNU" firstAttribute="leading" secondItem="fIQ-N0-GJ7" secondAttribute="leading" constant="20" id="TpZ-kx-lxQ"/>
+                            <constraint firstItem="fIQ-N0-GJ7" firstAttribute="bottom" secondItem="5ty-ed-mgw" secondAttribute="bottom" constant="23" id="Zm6-l7-I7M"/>
+                            <constraint firstItem="67L-8A-7Uz" firstAttribute="leading" secondItem="2co-Na-3sp" secondAttribute="leading" id="ol4-le-cL3"/>
+                            <constraint firstItem="5ty-ed-mgw" firstAttribute="top" secondItem="67L-8A-7Uz" secondAttribute="bottom" constant="45" id="owO-6D-Uax"/>
+                            <constraint firstItem="TbU-mX-3fW" firstAttribute="top" secondItem="fIQ-N0-GJ7" secondAttribute="top" id="phM-5E-idd"/>
+                            <constraint firstItem="TbU-mX-3fW" firstAttribute="trailing" secondItem="2co-Na-3sp" secondAttribute="trailingMargin" id="pjb-Qh-gDQ"/>
+                            <constraint firstItem="67L-8A-7Uz" firstAttribute="top" secondItem="2co-Na-3sp" secondAttribute="top" id="rUy-Za-xCH"/>
+                            <constraint firstItem="J9w-7T-qrw" firstAttribute="top" secondItem="Aun-sI-nNU" secondAttribute="bottom" constant="15" id="zvi-5j-v0I"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="endAddress" destination="J9w-7T-qrw" id="Va9-DK-O14"/>
+                        <outlet property="mapView" destination="67L-8A-7Uz" id="DSZ-M8-SGg"/>
+                        <outlet property="routeButton" destination="5ty-ed-mgw" id="sqn-Lb-hMh"/>
+                        <outlet property="startAddress" destination="Aun-sI-nNU" id="xuL-he-Kfq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bq6-Ox-QzS" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="b2r-Qh-N0m">
+                    <connections>
+                        <action selector="didLongPressedGesture:" destination="nvk-nd-ugB" id="d6N-CX-L0f"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <tapGestureRecognizer id="A2c-GK-geE">
+                    <connections>
+                        <action selector="didTapGesture:" destination="nvk-nd-ugB" id="oza-ft-QgD"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="136.23188405797103" y="132.58928571428572"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="current-location-icon.png" width="50" height="50"/>
+        <image name="minus.magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="plus.magnifyingglass" catalog="system" width="128" height="115"/>
+    </resources>
+</document>
