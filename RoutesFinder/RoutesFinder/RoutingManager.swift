@@ -7,8 +7,12 @@
 
 import heresdk
 import UIKit
+import CoreLocation
 
-class RoutingManager {
+// Core location instance is needed for requesting location authorization.
+private let locationManager = CLLocationManager()
+
+class RoutingManager: LocationDelegate {
 
     private var viewController: UIViewController
     private var mapView: MapViewLite
@@ -20,9 +24,9 @@ class RoutingManager {
     private var searchEngine: SearchEngine
     private var mapScene: MapSceneLite
 
-    var shouldFetchCoordinatesForStartLocation = false
-    var shouldFetchCoordinatesForDestLocation = false
-    var endLocationString = ""
+    private var shouldFetchCoordinatesForStartLocation = false
+    private var shouldFetchCoordinatesForDestLocation = false
+    private var endLocationString = ""
 
     init(viewController: UIViewController, mapView: MapViewLite) {
         self.viewController = viewController
@@ -43,6 +47,56 @@ class RoutingManager {
         } catch let engineInstantiationError {
             fatalError("Failed to initialize SearchEngine. Cause: \(engineInstantiationError)")
         }
+        
+        self.ensureLocationAuthorization()
+    }
+    
+    func fetchCurrentLocation() {
+        let locaationManager = CLLocationManager()
+        let currentLocation = locaationManager.location
+        let currentLocationCoordinates = currentLocation?.coordinate
+        
+        let currentLocationLatitude = Double (currentLocationCoordinates!.latitude)
+        let currentLocationLongitude = Double (currentLocationCoordinates!.longitude)
+        
+        let currentLocationGeoCoordinates = GeoCoordinates(latitude: currentLocationLatitude, longitude: currentLocationLongitude)
+
+        let camera = mapView.camera
+        camera.setTarget(currentLocationGeoCoordinates)
+        camera.setZoomLevel(12)
+        addCircleMapMarker(geoCoordinates: currentLocationGeoCoordinates, imageName: "poi.png")
+    }
+
+    public func ensureLocationAuthorization() {
+        // Get current location authorization status.
+        let locaationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
+        let locationAuthorizationStatus = locaationManager.authorizationStatus
+
+        // Check authorization.
+        switch locationAuthorizationStatus {
+        case .notDetermined:
+            // Not determined, request for authorization.
+            locationManager.requestAlwaysAuthorization()
+            break
+        case .denied, .restricted:
+            // Denied or restricted, request for user action.
+            let alert = UIAlertController(title: "Location services are disabled", message: "Please enable location services in your device settings.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            viewController.present(alert, animated: true, completion: nil)
+            break
+        case .authorizedAlways, .authorizedWhenInUse:
+            // Authorized, ok to continue.
+            break
+        default:
+            fatalError("Unknown location authorization status: \(locationAuthorizationStatus).")
+        }
+    }
+    
+    func onLocationUpdated(_ location: Location) {
+        print("Location updated")
     }
 
     private func geocodeAddressAtLocation(queryString: String, geoCoordinates: GeoCoordinates) {

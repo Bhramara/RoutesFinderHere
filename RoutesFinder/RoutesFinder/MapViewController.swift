@@ -20,8 +20,8 @@ struct LocationModel: Codable {
 enum CodingKeys: String, CodingKey {
     case locationCoordinates = "locationcoords"
     case type = "type"
-    
 }
+
 class MapViewController: UIViewController {
 
     @IBOutlet private var mapView: MapViewLite!
@@ -100,9 +100,7 @@ class MapViewController: UIViewController {
     }
 
     @IBAction func didTapUserLocation(_ sender: UIButton) {
-        let camera = mapView.camera
-        camera.setTarget(GeoCoordinates(latitude: 52.520798, longitude: 13.409408))
-        camera.setZoomLevel(12)
+        routingManager.fetchCurrentLocation()
     }
 
     @IBAction func zoomIn(_ sender: UIButton) {
